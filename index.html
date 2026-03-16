@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTC-8">
+        <title>"Rock Paper Scissors</title>
+
+    </head> 
+    <body>
+        
+
+
+        <script>
+            let humanScore = 0, computerScore = 0;
+            console.log("Human Score ", humanScore)
+            console.log("Computer Score ", computerScore)
+
+            /* Create Function to randomize the computer choice*/
+            function getComputerChoice () {
+                /* Create Variable to store choice */
+                let compChoice;
+                /* Create a vairable to equal between 1 and 100 using a random number generator, and find remainder */
+                let selection = (Math.floor(Math.random() * 100) + 1) % 3;
+                /* 0 = rock, 1 = paper, 2 = scissors */
+                if (selection === 0) {
+                    compChoice = "Rock"
+                }
+                else if (selection === 1) {
+                    compChoice = "Paper"
+                }
+                else {
+                    compChoice = "Scisscors"
+                }
+                /* Return Selection */
+                return compChoice;
+            }
+
+            /*Create Function to get the Human choice*/
+            function getHumanChoice (){
+                /* Create while loop to Validate Human Choice */
+                /* create booean for valid human choice*/
+                let humanChoiceValid = false;
+                /*Create variable to except human choice*/
+                let humanChoice;
+                /* while loop */
+                while (humanChoiceValid === false) {
+                    /*prompt user to enter "Rock" "Paper" or "Scissors"*/
+                    humanChoice = prompt("Please enter 'Rock' 'Paper' or 'Scissors'")
+                    /*Ensure human choice returns with a capital first letter and lower case for the rest */
+                    humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
+                    /* If statement to check if Valid*/
+                    if ((humanChoice === "Rock") || (humanChoice === "Paper") || (humanChoice === "Scissors")) {
+                        humanChoiceValid = true;
+                    }
+                    else {
+                        humanChoiceValid = false;
+                        console.log("Please enter a valid choise")
+                    }
+                }
+                /*Retrun human choice*/
+                return humanChoice;
+            }
+
+            /* Create Play function to compare human and computer choice */
+            function playRound (str1, str2) {
+                /**/
+            }
+
+            console.log("Computer Chooses ", getComputerChoice())
+            console.log("Human Chooses ", getHumanChoice())
+        </script>
+
+
+
+    </body>
+</html>
