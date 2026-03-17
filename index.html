@@ -10,14 +10,16 @@
 
 
         <script>
+
+            /*Create variable to except human choice*/
+            let humanChoice;
+            /* Create Variable to store choice */
+            let compChoice;
             let humanScore = 0, computerScore = 0;
-            console.log("Human Score ", humanScore)
-            console.log("Computer Score ", computerScore)
+            let winner  = false;
 
             /* Create Function to randomize the computer choice*/
             function getComputerChoice () {
-                /* Create Variable to store choice */
-                let compChoice;
                 /* Create a vairable to equal between 1 and 100 using a random number generator, and find remainder */
                 let selection = (Math.floor(Math.random() * 100) + 1) % 3;
                 /* 0 = rock, 1 = paper, 2 = scissors */
@@ -28,7 +30,7 @@
                     compChoice = "Paper"
                 }
                 else {
-                    compChoice = "Scisscors"
+                    compChoice = "Scissors"
                 }
                 /* Return Selection */
                 return compChoice;
@@ -39,12 +41,12 @@
                 /* Create while loop to Validate Human Choice */
                 /* create booean for valid human choice*/
                 let humanChoiceValid = false;
-                /*Create variable to except human choice*/
-                let humanChoice;
+
+                /*prompt/ user to enter "Rock" "Paper" or "Scissors"*/
+                humanChoice = prompt("Please enter 'Rock' 'Paper' or 'Scissors'")
+
                 /* while loop */
                 while (humanChoiceValid === false) {
-                    /*prompt user to enter "Rock" "Paper" or "Scissors"*/
-                    humanChoice = prompt("Please enter 'Rock' 'Paper' or 'Scissors'")
                     /*Ensure human choice returns with a capital first letter and lower case for the rest */
                     humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
                     /* If statement to check if Valid*/
@@ -53,7 +55,7 @@
                     }
                     else {
                         humanChoiceValid = false;
-                        console.log("Please enter a valid choise")
+                        humanChoice = prompt("Try Again! Please enter 'Rock' 'Paper' or 'Scissors'")
                     }
                 }
                 /*Retrun human choice*/
@@ -61,12 +63,61 @@
             }
 
             /* Create Play function to compare human and computer choice */
-            function playRound (str1, str2) {
-                /**/
+            function playRound (humanChoice, compChoice) {
+                /* if statement to compare humanChoice to compChoice */
+                if (humanChoice === compChoice){
+                    console.log("It's a Tie!!!")
+                }
+                else if ((humanChoice === "Rock") && (compChoice === "Scissors")) {
+                    console.log ("Human wins this round");
+                    humanScore++;
+                }
+                else if ((humanChoice === "Paper") && (compChoice === "Rock")) {
+                    console.log ("Human wins this round");
+                    humanScore++;
+                }
+                else if ((humanChoice === "Scissors") && (compChoice === "Paper")) {
+                    console.log ("Human wins this round");
+                    humanScore++;
+                }
+                else {
+                    console.log("Computer Wins this Round");
+                    computerScore++;
+                }
             }
 
-            console.log("Computer Chooses ", getComputerChoice())
-            console.log("Human Chooses ", getHumanChoice())
+            /* Create function to determine if there is a winner */
+            function checkWinner ( humanScore, computerScore ){
+                /* check if either human or computer has won 10 rounds */
+                if (humanScore === 10) {
+                    winner = true;
+                    console.log("Congrats Human, You won the game")
+                }
+                else if (computerScore === 10) {
+                    winner = true;
+                    console.log("The computers win again")
+                }
+                else {
+                    winner = false;
+                }
+            }
+
+
+            /* create while statement to run while niether the computer of the human has won 10 games */
+            while (winner === false){
+                console.log("Human Score ", humanScore)
+                console.log("Computer Score ", computerScore)
+
+                console.log("Human Chooses ", getHumanChoice())
+                console.log("Computer Chooses ", getComputerChoice())
+                
+
+                playRound(humanChoice, compChoice);
+                checkWinner(humanScore, computerScore);
+
+
+            }
+            
         </script>
 
 
