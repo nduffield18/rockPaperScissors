@@ -89,17 +89,36 @@
             /* Create function to determine if there is a winner */
             function checkWinner ( humanScore, computerScore ){
                 /* check if either human or computer has won 10 rounds */
-                if (humanScore === 10) {
+                if (humanScore === 1) {
                     winner = true;
                     console.log("Congrats Human, You won the game")
                 }
-                else if (computerScore === 10) {
+                else if (computerScore === 1) {
                     winner = true;
                     console.log("The computers win again")
                 }
                 else {
                     winner = false;
                 }
+            }
+
+            /* Create a function asking if they want to play again */
+            function playAgain() {
+                let again = prompt("Would you like to play again?: Yes or No")
+                let notAgain = false
+
+               
+                while (notAgain === false) {
+                    again = again.charAt(0).toUpperCase() + again.slice(1).toLowerCase();
+
+                    if ((again === "Yes") || (again === "No")){
+                            notAgain = true;
+                    }
+                    else {
+                        again = prompt("Invalid Respose, Would you like to play again?: Yes or No")
+                    }   
+                }
+                return again;
             }
 
 
@@ -115,8 +134,19 @@
                 playRound(humanChoice, compChoice);
                 checkWinner(humanScore, computerScore);
 
-
+                if (winner === true) {
+                    if (playAgain() == "Yes"){
+                        humanScore = 0;
+                        computerScore = 0;
+                        winner = false;
+                    }
+                    else{
+                        winner = true;
+                    }
+                }
             }
+
+            
             
         </script>
 
