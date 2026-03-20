@@ -86,44 +86,65 @@
                 }
             }
 
-            /* Create function to determine the winner */
-            function findWinner ( humanScore, computerScore ){
+            /* Create function to determine if there is a winner */
+            function checkWinner ( humanScore, computerScore ){
                 /* check if either human or computer has won 10 rounds */
-                if (humanScore > computerScore) {
+                if (humanScore === 10) {
+                    winner = true;
                     console.log("Congrats Human, You won the game")
                 }
-                else if (computerScore > humanScore) {
+                else if (computerScore === 10) {
+                    winner = true;
                     console.log("The computers win again")
                 }
                 else {
-                    console.log("This game is a Tie")
+                    winner = false;
                 }
             }
 
-            /* Create a function to play 5 rounds and determine a winner */
-            function playGame() {
-                /* variable to play 5 times */
-                let playFive = 0;
+            /* Create a function asking if they want to play again */
+            function playAgain() {
+                let again = prompt("Would you like to play again?: Yes or No")
+                let notAgain = false
 
-                while (playFive < 5) {
-                    /* declare human and computer selection */
-                    const humanSelection = getHumanChoice();
-                    const computerSeletion = getComputerChoice();
+               
+                while (notAgain === false) {
+                    again = again.charAt(0).toUpperCase() + again.slice(1).toLowerCase();
 
-                    /* Call playRound */
-                    playRound(humanSelection, computerSeletion);
-
-                    /* count up on playFive */
-                    playFive++;
+                    if ((again === "Yes") || (again === "No")){
+                            notAgain = true;
+                    }
+                    else {
+                        again = prompt("Invalid Respose, Would you like to play again?: Yes or No")
+                    }   
                 }
-
+                return again;
             }
 
-            /* Play Game */
-            playGame();
-            /* Find the winner */
-            findWinner(humanScore, computerScore);
-            
+
+            /* create while statement to run while niether the computer of the human has won 10 games */
+            while (winner === false){
+                console.log("Human Score ", humanScore)
+                console.log("Computer Score ", computerScore)
+
+                console.log("Human Chooses ", getHumanChoice())
+                console.log("Computer Chooses ", getComputerChoice())
+                
+
+                playRound(humanChoice, compChoice);
+                checkWinner(humanScore, computerScore);
+
+                if (winner === true) {
+                    if (playAgain() == "Yes"){
+                        humanScore = 0;
+                        computerScore = 0;
+                        winner = false;
+                    }
+                    else{
+                        winner = true;
+                    }
+                }
+            }
 
             
             
